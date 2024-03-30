@@ -17,7 +17,7 @@ CREATE TABLE Book (
   page_count INT, -- GoogleBooksAPI
   categories VARCHAR(255), -- GoogleBooksAPI
   language VARCHAR(255), -- GoogleBooksAPI
-  dimensions VARCHAR(255). -- GoogleBooksAPI
+  dimensions VARCHAR(255), -- GoogleBooksAPI
   language VARCHAR(255), -- GoogleBooksAPI
   edition INT, -- GoogleBooksAPI
   format VARCHAR(255), -- GoogleBooksAPI
@@ -33,7 +33,7 @@ CREATE TABLE Book_Serie (
   serie_id INT,
   order_number INT, -- GoogleBooksAPI
   FOREIGN KEY(book_id) REFERENCES Book(id),
-  FOREIGN KEY(serie_id) REFERENCES Serie(id).
+  FOREIGN KEY(serie_id) REFERENCES Serie(id),
   UNIQUE(book_id, serie_id, order_number)
 );
 
