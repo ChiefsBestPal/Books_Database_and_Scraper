@@ -5,35 +5,36 @@ CREATE DATABASE myDB;
 USE myDB;
 
 CREATE TABLE Book (
-  book_id INT PRIMARY KEY,
-  isbn10 VARCHAR(10) UNIQUE,
-  isbn13 VARCHAR(13) UNIQUE,
-  title VARCHAR(255) NOT NULL,
-  author VARCHAR(255) NOT NULL,
-  publication_date DATE,
-  publisher VARCHAR(255),
-  page_count INT,
-  price DECIMAL(10,2),
-  language VARCHAR(50),
-  num_edition INT,
-  format VARCHAR(355),
-  synopsis TEXT,
-  overview TEXT,
-  dewey_decimal_classification DECIMAL(6,3)
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  volume_id VARCHAR(255) UNIQUE,
+  title VARCHAR(255) NOT NULL, -- GoogleBooksAPI
+  author VARCHAR(255) NOT NULL, -- GoogleBooksAPI
+  publisher VARCHAR(255), -- GoogleBooksAPI
+  publication_date DATE, -- GoogleBooksAPI
+  description TEXT, -- GoogleBooksAPI
+  isbn10 VARCHAR(10) UNIQUE, -- GoogleBooksAPI
+  isbn13 VARCHAR(13) UNIQUE, -- GoogleBooksAPI
+  page_count INT, -- GoogleBooksAPI
+  categories VARCHAR(255), -- GoogleBooksAPI
+  language VARCHAR(255), -- GoogleBooksAPI
+  dimensions VARCHAR(255). -- GoogleBooksAPI
+  language VARCHAR(255), -- GoogleBooksAPI
+  edition INT, -- GoogleBooksAPI
+  format VARCHAR(255), -- GoogleBooksAPI
 );
 
 CREATE TABLE Serie (
-  serie_id INT PRIMARY KEY,
-  serie_name VARCHAR(255) UNIQUE
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  serie_id VARCHAR(255) UNIQUE -- GoogleBooksAPI
 );
 
 CREATE TABLE Book_Serie (
   book_id INT,
   serie_id INT,
-  num_in_serie INT,
-  FOREIGN KEY (book_id) REFERENCES Book(book_id),
-  FOREIGN KEY (serie_id) REFERENCES Serie(serie_id),
-  UNIQUE(book_id, serie_id)
+  order_number INT, -- GoogleBooksAPI
+  FOREIGN KEY(book_id) REFERENCES Book(id),
+  FOREIGN KEY(serie_id) REFERENCES Serie(id).
+  UNIQUE(book_id, serie_id, order_number)
 );
 
 CREATE TABLE GenericBookProfile (
@@ -56,7 +57,7 @@ CREATE TABLE GenericBookProfile (
   other_statistics TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (book_id) REFERENCES Book(book_id)
+  FOREIGN KEY (book_id) REFERENCES Book(id)
 );
 
 
